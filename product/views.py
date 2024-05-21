@@ -1,4 +1,3 @@
-from django.db.models import Sum
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -29,8 +28,9 @@ def products_detail_api_view(request, id): # 100
 @api_view(['GET'])
 def categories_list_api_view(request):
      categories = Category.objects.all()
+     products_count = Product.objects.count()
      list_ = CategorySerializer(categories, many=True).data
-     return Response(data=list_, status=status.HTTP_200_OK)
+     return Response(data=list_, count=products_count, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -48,8 +48,9 @@ def categories_detail_api_view(request, id): # 100
 @api_view(['GET'])
 def reviews_list_api_view(request):
      reviews = Review.objects.all()
+     rating = sum(Review.stars)/len(Review.stars)
      list_ = ReviewSerializer(reviews, many=True).data
-     return Response(data=list_, status=status.HTTP_200_OK)
+     return Response(data=list_, rating= rating, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])

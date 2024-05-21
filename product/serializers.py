@@ -17,16 +17,14 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = 'product text stars'.split()
+        fields = 'product text '.split()
 
-        def get_queryset(self):
-            return Product.objects.annotate(rating=Avg('reviews__stars'))
 
 
 class ReviewDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = 'product text stars'.split()
+        fields = 'product text '.split()
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -34,8 +32,6 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = 'name'.split()
 
-        def get_queryset(self):
-            return Category.objects.annotate(products_count=Count('product'))
 
 
 class CategoryDetailSerializer(serializers.ModelSerializer):

@@ -45,11 +45,11 @@ def categories_detail_api_view(request, id): # 100
 
 
 
-# @api_view(['GET'])
-# def reviews_list_api_view(request):
-#      reviews = Review.objects.all()
-#      list_ = ReviewSerializer(reviews, many=True).data
-#      return Response(data=list_, status=status.HTTP_200_OK)
+@api_view(['GET'])
+def reviews_list_api_view(request):
+     reviews = Review.objects.all()
+     list_ = ReviewSerializer(reviews, many=True).data
+     return Response(data=list_, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -63,8 +63,3 @@ def reviews_detail_api_view(request, id): # 100
      return Response(data=review_dict)
 
 
-@api_view(['GET'])
-def rating_api_view(request):
-     reviews = Review.objects.all()
-     list_ = ReviewSerializer(reviews, many=True).data
-     return Response(data=list_, status=status.HTTP_200_OK)

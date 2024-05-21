@@ -22,6 +22,7 @@ class Product(models.Model):
 
 class Review(models.Model):
     text = models.TextField()
+    stars = models.IntegerField(default=1, choices=[(i, i) for i in range(1, 6)])
     product = models.ForeignKey(Product,
                                 on_delete=models.CASCADE,
                                 related_name='reviews',

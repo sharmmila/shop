@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -44,11 +45,11 @@ def categories_detail_api_view(request, id): # 100
 
 
 
-@api_view(['GET'])
-def reviews_list_api_view(request):
-     reviews = Review.objects.all()
-     list_ = ReviewSerializer(reviews, many=True).data
-     return Response(data=list_, status=status.HTTP_200_OK)
+# @api_view(['GET'])
+# def reviews_list_api_view(request):
+#      reviews = Review.objects.all()
+#      list_ = ReviewSerializer(reviews, many=True).data
+#      return Response(data=list_, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -60,3 +61,10 @@ def reviews_detail_api_view(request, id): # 100
                          data={'error': 'Review not found'})
      review_dict = ReviewDetailSerializer(review).data
      return Response(data=review_dict)
+
+
+@api_view(['GET'])
+def rating_api_view(request):
+     reviews = Review.objects.all()
+     list_ = ReviewSerializer(reviews, many=True).data
+     return Response(data=list_, status=status.HTTP_200_OK)
